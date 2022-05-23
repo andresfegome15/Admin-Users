@@ -8,7 +8,9 @@ function App() {
   const [users, setUsers] = useState([])
   const [selectUser, setSelectUser] = useState(null)
   const [statusSearch, setStatusSearch] = useState(null)
- 
+  const [noFound, setNoFound] = useState(null)
+  const [buttonSearch, SetButtonSearch] = useState(false)
+
 
 /*petitions */
   useEffect(() =>{
@@ -23,18 +25,16 @@ function App() {
   })
 
   const addUser =(addUser)=>{
-    console.log(addUser);
-    console.log(selectUser);
     axios.post(`https://users-crud1.herokuapp.com/users/`,addUser)
     .then(()=> getUser())
     .catch(error => console.log(error.response))
   }
   
   const getsearch =(search)=>{
-
-      axios.get(`https://users-crud1.herokuapp.com/users/${search}/`)
+        axios.get(`https://users-crud1.herokuapp.com/users/${search}/`)
       .then(res => setUsers(res.data))
-      .catch(error => console.log(error.response))
+      .catch(error => setNoFound(error.response))
+      
  
   }
   const cancelSeacrh =()=>{
@@ -61,13 +61,18 @@ function App() {
       setSelectUser(res)
   }
 
+  const statebuttonSearch =(buttonSearchlist)=> {
+      SetButtonSearch(buttonSearchlist)
+  }
 
   
   return (
     <div className="App">
-      <UsersForm addUser={addUser}selectUser={selectUser} inselectUser={inselectUser} updateUser={updateUser} getsearch={getsearch} cancelSeacrh={cancelSeacrh}/>
+      <UsersForm addUser={addUser}selectUser={selectUser} inselectUser={inselectUser} 
+                 updateUser={updateUser} getsearch={getsearch} cancelSeacrh={cancelSeacrh}/>
         <div className='container-users'>
-          <UsersList users={users} userselect={userselect} deleteUser={deleteUser} statusSearch={statusSearch} />
+          <UsersList users={users} userselect={userselect} deleteUser={deleteUser}
+                     statusSearch={statusSearch} noFound={noFound} />
         </div>
     </div>
   );

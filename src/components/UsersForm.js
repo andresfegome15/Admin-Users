@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 
 
-const UsersForm = ({addUser, selectUser, inselectUser, updateUser, getsearch, cancelSeacrh}) => {
+const UsersForm = ({addUser, selectUser, inselectUser, updateUser, getsearch, cancelSeacrh,}) => {
     const [isVisible, setIsVisible] = useState(false)
     const [showform, setShowForm] =useState(false)
     const [searchstatus, setSearchStatus] = useState(false)
@@ -58,11 +58,11 @@ const UsersForm = ({addUser, selectUser, inselectUser, updateUser, getsearch, ca
           if(searchstatus ===false){
               getsearch(search)
               setSearch("")
-              setSearchStatus(!searchstatus)
+              setSearchStatus(true)
 
           }else{
             cancelSeacrh(null)
-            setSearchStatus(!searchstatus)
+            setSearchStatus(false)
           }
           
       }
@@ -71,11 +71,11 @@ const UsersForm = ({addUser, selectUser, inselectUser, updateUser, getsearch, ca
         <div className='divuserform'>
             <header className='header'>
                 <h1>Usuarios</h1>
-                <input type="text" 
+                <input type="number" 
                     className='inputseacrh' 
                     onChange={e=> setSearch(e.target.value)}
                     value={search}/>
-                    <button className='buttons-search' type='button' onClick={()=>{statusSearch()}}>{searchstatus?"x":"O"}</button>
+                    <button className='buttons-search' type='button' onClick={()=>{statusSearch()}}>{searchstatus?"X":">>"}</button>
             <button type='button' className='button-add' onClick={()=> setShowForm(!showform)}>+ Crear Usuario</button>
         
       </header>
