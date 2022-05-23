@@ -74,7 +74,8 @@ const UsersForm = ({addUser, selectUser, inselectUser, updateUser, getsearch, ca
                 <input type="number" 
                     className='inputseacrh' 
                     onChange={e=> setSearch(e.target.value)}
-                    value={search}/>
+                    value={search}
+                    placeholder='Id ejm: 1234'/>
                     <button className='buttons-search' type='button' onClick={()=>{statusSearch()}}>{searchstatus?"X":">>"}</button>
             <button type='button' className='button-add' onClick={()=> setShowForm(!showform)}>+ Crear Usuario</button>
         
